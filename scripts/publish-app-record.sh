@@ -11,6 +11,8 @@ CERC_REPO_REF=${CERC_REPO_REF:-${GITHUB_SHA:-`git log -1 --format="%H"`}}
 CERC_IS_LATEST_RELEASE=${CERC_IS_LATEST_RELEASE:-"true"}
 
 rcd_name=$(jq -r '.name' package.json | sed 's/null//')
+random_string=$(openssl rand -base64 24 | tr -dc 'A-Za-z0-9' | head -c24)
+rcd_name="$name-$random_string"
 rcd_desc=$(jq -r '.description' package.json | sed 's/null//')
 rcd_repository=$(jq -r '.repository' package.json | sed 's/null//')
 rcd_homepage=$(jq -r '.homepage' package.json | sed 's/null//')
@@ -67,7 +69,7 @@ if [ -z "$CERC_REGISTRY_APP_CRN" ]; then
   authority=$(echo "$rcd_name" | cut -d'/' -f1 | sed 's/@//')
   app=$(echo "$rcd_name" | cut -d'/' -f2-)
   CERC_REGISTRY_APP_CRN="lrn://$authority/applications/$app"
-  #laconic -c $CONFIG_FILE registry authority reserve ${authority} --user-key "${CERC_REGISTRY_USER_KEY}"
+ #laconic -c $CONFIG_FILE registry authority reserve ${authority} --user-key "${CERC_REGISTRY_USER_KEY}"
   laconic -c $CONFIG_FILE registry authority bond set ${authority} ${CERC_REGISTRY_BOND_ID} --user-key "${CERC_REGISTRY_USER_KEY}"
 fi
 

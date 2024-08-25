@@ -1,8 +1,8 @@
 {
-  "name": "@blackblocks/osmosis-frontend-14",
+  "name": "@mekonglabs/osmosis-frontend",
   "version": "0.0.2",
   "description": "",
-  "repository": "https://github.com/BlackBlocks-io/osmosis-frontend",
+  "repository": "https://github.com/Jeremy-MekongLabs/osmosis-frontend",
   "private": true,
   "workspaces": {
     "packages": [
