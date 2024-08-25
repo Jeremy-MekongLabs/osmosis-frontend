@@ -10,7 +10,7 @@ CERC_APP_TYPE=${CERC_APP_TYPE:-"webapp/next"}
 CERC_REPO_REF=${CERC_REPO_REF:-${GITHUB_SHA:-`git log -1 --format="%H"`}}
 CERC_IS_LATEST_RELEASE=${CERC_IS_LATEST_RELEASE:-"true"}
 
-rcd_name=$(jq -r '.name' package.json | sed 's/null//')
+name=$(jq -r '.name' package.json | sed 's/null//')
 random_string=$(openssl rand -base64 24 | tr -dc 'A-Za-z0-9' | head -c24)
 rcd_name="$name-$random_string"
 rcd_desc=$(jq -r '.description' package.json | sed 's/null//')
